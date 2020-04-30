@@ -1,0 +1,4 @@
+1. Cuando se a iniciado session y regrese al pages-login.html, me redirija al index.
+2. Mostrar los mensajes por determinados segundos.
+3. crear una funcion JavaScript con un metodo AJAX para mostar la tabla.
+4. Editar y eliminar los productos.
