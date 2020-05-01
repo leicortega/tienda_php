@@ -28,27 +28,28 @@ $(document).ready(function () {
             type: 'POST',
             data: $('#form_agregar_producto').serialize(),
             success: function (data) {
-                console.log(data);
                 if (data == 1) {
-                    $(document).ready(function() {
-                        setTimeout(function() {
-                            $(".alert1").fadeOut(1500);
-                        },3000);
+                    mostrar_tabla();
+
+                    setTimeout(function() {
+                        $(".alert1").fadeOut(1500);
+                    },3000);
                      
-                        setTimeout(function() {
-                            $(".alert2").fadeOut(1500);
-                        },15000);
-                    });
+                    setTimeout(function() {
+                        $(".alert2").fadeOut(1500);
+                    },15000);
+
                     $('#mensajes').html(`
-                        <div class="alert1 alert-success bg-success text-white" role="alert">
+                        <div class="alert alert1 alert-success bg-success text-white" role="alert">
                             El producto se creo correctamente.
                         </div>
                     `);
                     $('.bs-example-modal-xl').modal('hide');
                     $('#form_agregar_producto')[0].reset();
+                    
                 } else {
                     $('#mensajes').html(`
-                        <div class="alert2 alert-danger bg-danger text-white" role="alert">
+                        <div class="alert alert2 alert-danger bg-danger text-white" role="alert">
                             El producto NO se creo correctamente. Contacte al desarrollador.
                         </div>
                     `);
@@ -64,4 +65,12 @@ $(document).ready(function () {
     // Peticon AJAX para mostrar tabla
     
 
-});
+    function mostrar_tabla() {
+    $.ajax({
+        url: 'assets/php/mostrar_tabla.php',
+        type: 'GET',
+        success: function (data) {
+            $('#div_mostrar_tabla').html(data)
+        }
+    });
+}
