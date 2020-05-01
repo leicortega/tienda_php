@@ -63,7 +63,11 @@ $(document).ready(function () {
     });
 
     // Peticon AJAX para mostrar tabla
-    
+    if (window.location.pathname == '/tienda_php/productos.php') {
+        mostrar_tabla()
+    }
+
+});
 
     function mostrar_tabla() {
     $.ajax({
@@ -73,4 +77,4 @@ $(document).ready(function () {
             $('#div_mostrar_tabla').html(data)
         }
     });
-}}
+}
