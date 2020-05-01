@@ -7,7 +7,7 @@ extract($_REQUEST);
 
 $conexion = conexion();
 
-$sql = $conexion->prepare('SELECT * from productos');
+$sql = $conexion->prepare('SELECT * from productos p, categorias c where p.categoria = c.id');
 $sql->execute();
 
 $datos = $sql->fetchAll();
@@ -34,10 +34,10 @@ $datos = $sql->fetchAll();
                     <td><?php echo $dato['nombre']; ?></td>
                     <td><?php echo $dato['descripcion']; ?></td>
                     <td><?php echo $dato['precio']; ?></td>
-                    <td><?php echo $dato['categoria']; ?></td>
+                    <td><?php echo $dato[6]; ?></td>
                     <td class="text-center">
-                        <button type="button" class="btn btn-warning waves-effect waves-light" onclick="editar(<?php echo $dato['id']; ?>)"><i class="mdi mdi-pencil"></i></button> 
-                        <button type="button" class="btn btn-danger waves-effect waves-light" onclick="eliminar(<?php echo $dato['id']; ?>)"><i class="mdi mdi-delete"></i></button>
+                        <button type="button" class="btn btn-warning waves-effect waves-light" onclick="editar(<?php echo $dato[0]; ?>)"><i class="mdi mdi-pencil"></i></button> 
+                        <button type="button" class="btn btn-danger waves-effect waves-light" onclick="eliminar(<?php echo $dato[0]; ?>)"><i class="mdi mdi-delete"></i></button>
                     </td>
                 </tr>
             <?php } ?>

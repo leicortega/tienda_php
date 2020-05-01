@@ -1,6 +1,8 @@
 <?php
 
 require('assets/php/secure_login.php');
+require('assets/php/conexion.php');
+$conexion = conexion();
 
 ?>
 
@@ -125,9 +127,16 @@ require('assets/php/secure_login.php');
                                     <div class="col-sm-10">
                                         <select class="form-control" id="categoria" name="categoria" required>
                                             <option value="">Seleccione la categoria</option>
-                                            <option value="1">Categoria 1</option>
-                                            <option value="2">Categoria 2</option>
-                                            <option value="3">Categoria 3</option>
+                                            <?php
+
+                                            $sql_categorias = $conexion->prepare('SELECT * from categorias');
+                                            $sql_categorias->execute();
+
+                                            $categorias = $sql_categorias->fetchAll();
+                                            foreach ($categorias as $categoria) { ?>
+                                                <option value="<?php echo $categoria['id']; ?>"><?php echo $categoria['nombre']; ?></option>
+                                            <?php } ?>
+                                            
                                         </select>
                                     </div>
                                 </div>
@@ -181,9 +190,15 @@ require('assets/php/secure_login.php');
                                     <div class="col-sm-10">
                                         <select class="form-control" id="categoria_editar" name="categoria_editar">
                                             <option value="">Seleccione la categoria</option>
-                                            <option value="1">Categoria 1</option>
-                                            <option value="2">Categoria 2</option>
-                                            <option value="3">Categoria 3</option>
+                                            <?php
+
+                                            $sql_categorias = $conexion->prepare('SELECT * from categorias');
+                                            $sql_categorias->execute();
+
+                                            $categorias = $sql_categorias->fetchAll();
+                                            foreach ($categorias as $categoria) { ?>
+                                                <option value="<?php echo $categoria['id']; ?>"><?php echo $categoria['nombre']; ?></option>
+                                            <?php } ?>
                                         </select>
                                     </div>
                                 </div>

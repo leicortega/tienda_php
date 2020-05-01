@@ -15,7 +15,11 @@
                 <li class="menu-title">Apps</li>
 
                 <li>
-                    <a href="productos.php" class="waves-effect"><i class="ion ion-md-cart"></i><span> Productos </span></a>
+                    <a href="javascript:void(0);" class="waves-effect waves-light" aria-expanded="false"><i class="ion ion-md-cart"></i><span> Productos <span class="float-right menu-arrow"><i class="mdi mdi-chevron-right"></i></span> </span></a>
+                    <ul class="submenu mm-collapse">
+                        <li><a href="productos.php">Productos</a></li>
+                        <li><a href="categorias.php">Categorias</a></li>
+                    </ul>
                 </li>
 
             </ul>
