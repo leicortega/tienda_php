@@ -2,3 +2,5 @@
 2. Mostrar los mensajes por determinados segundos.
 3. crear una funcion JavaScript con un metodo AJAX para mostar la tabla.
 4. Editar y eliminar los productos.
+
+5. Hacer el CRUD de Categorias
