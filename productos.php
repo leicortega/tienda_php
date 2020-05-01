@@ -62,7 +62,7 @@ require('assets/php/secure_login.php');
                                         <h4 class="mt-0 header-title">Bordered table</h4>
                                         <p class="text-muted mb-4">Add <code>.table-bordered</code> for borders on all sides of the table and cells.</p>    
                                         
-                                        <div class="table-responsive">
+                                        <div class="table-responsive " id="div_mostrar_tabla">
                                             <table class="table table-bordered mb-0">
         
                                                 <thead>
