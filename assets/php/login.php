@@ -18,8 +18,10 @@ $count = $sql->rowCount();
 if ($count == 1) {
     $_SESSION['user'] = $_REQUEST['identificacion'];
     echo 1;
+    
 } else {
     echo 0;
+    
 }
 
 

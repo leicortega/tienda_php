@@ -3,5 +3,5 @@
 session_start();
 
 if (!$_SESSION['user']) {
-    header('location:pages-login.html');
+    header('location:pages-login.php');
 }
