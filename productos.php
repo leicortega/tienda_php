@@ -123,17 +123,75 @@ require('assets/php/secure_login.php');
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Categoria</label>
                                     <div class="col-sm-10">
-                                        <select class="form-control" id="categoria" name="categoria">
-                                            <option>Seleccione la categoria</option>
-                                            <option>Categoria 1</option>
-                                            <option>Categoria 2</option>
-                                            <option>Categoria 3</option>
+                                        <select class="form-control" id="categoria" name="categoria" required>
+                                            <option value="">Seleccione la categoria</option>
+                                            <option value="1">Categoria 1</option>
+                                            <option value="2">Categoria 2</option>
+                                            <option value="3">Categoria 3</option>
                                         </select>
                                     </div>
                                 </div>
 
                                 <div class="mt-3">
                                     <button class="btn btn-primary waves-effect waves-light" type="submit">Agregar</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div>
+
+            <!-- MODAL PARA EDITAR PRODUCTOS -->
+            <div class="modal fade modal_editar_productos" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title mt-0" id="myExtraLargeModalLabel">Editar Producto</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                            <form method="post" id="form_editar_producto">
+                                <div class="form-group row">
+                                    <label for="nombre_editar" class="col-sm-2 col-form-label">Nombre</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" type="text" id="nombre_editar" name="nombre_editar">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="descripcion_editar" class="col-sm-2 col-form-label">Descripcion</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" type="text" id="descripcion_editar" name="descripcion_editar">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="precio_editar" class="col-sm-2 col-form-label">Precio</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" type="number" id="precio_editar" name="precio_editar">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Categoria</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" id="categoria_editar" name="categoria_editar">
+                                            <option value="">Seleccione la categoria</option>
+                                            <option value="1">Categoria 1</option>
+                                            <option value="2">Categoria 2</option>
+                                            <option value="3">Categoria 3</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <input type="hidden" id="id_editar" name="id_editar" />
+
+                                <div class="mt-3">
+                                    <button class="btn btn-primary waves-effect waves-light" type="submit">Editar</button>
                                 </div>
                             </form>
 
