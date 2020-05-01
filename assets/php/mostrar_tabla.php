@@ -36,8 +36,8 @@ $datos = $sql->fetchAll();
                     <td><?php echo $dato['precio']; ?></td>
                     <td><?php echo $dato['categoria']; ?></td>
                     <td class="text-center">
-                        <button type="button" class="btn btn-warning waves-effect waves-light"><i class="mdi mdi-pencil"></i></button> 
-                        <button type="button" class="btn btn-danger waves-effect waves-light"><i class="mdi mdi-delete"></i></button>
+                        <button type="button" class="btn btn-warning waves-effect waves-light" onclick="editar(<?php echo $dato['id']; ?>)"><i class="mdi mdi-pencil"></i></button> 
+                        <button type="button" class="btn btn-danger waves-effect waves-light" onclick="eliminar(<?php echo $dato['id']; ?>)"><i class="mdi mdi-delete"></i></button>
                     </td>
                 </tr>
             <?php } ?>

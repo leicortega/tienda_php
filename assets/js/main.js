@@ -62,13 +62,55 @@ $(document).ready(function () {
         return false;
     });
 
-    // Peticon AJAX para mostrar tabla
+    // Peticon AJAX para EDITAR producto
+    $('#form_editar_producto').submit(function () {
+        $.ajax({
+            url: 'assets/php/editar_producto.php',
+            type: 'POST',
+            data: $('#form_editar_producto').serialize(),
+            success: function (data) {
+                if (data == 1) {
+                    mostrar_tabla();
+
+                    setTimeout(function() {
+                        $(".alert1").fadeOut(1500);
+                    },3000);
+
+                    $('#mensajes').html(`
+                        <div class="alert alert1 alert-success bg-success text-white" role="alert">
+                            El producto se edito correctamente.
+                        </div>
+                    `);
+                    $('.modal_editar_productos').modal('hide');
+                    $('#form_editar_producto')[0].reset();
+                    
+                } else {
+                    setTimeout(function() {
+                        $(".alert2").fadeOut(1500);
+                    },15000);
+
+                    $('#mensajes').html(`
+                        <div class="alert alert2 alert-danger bg-danger text-white" role="alert">
+                            El producto NO se edito correctamente. Contacte al desarrollador.
+                        </div>
+                    `);
+                    $('.modal_editar_productos').modal('hide');
+                    $('#form_editar_producto')[0].reset();
+                }
+            }
+        })
+    
+        return false;
+    });
+
+    // Condicion para mostrar la tabla si esta en la ruta productos.php
     if (window.location.pathname == '/tienda_php/productos.php') {
         mostrar_tabla()
     }
 
 });
 
+// Funcion con peticion AJAX para mostrar la tabla de productos
 function mostrar_tabla() {
     $.ajax({
         url: 'assets/php/mostrar_tabla.php',
@@ -77,4 +119,27 @@ function mostrar_tabla() {
             $('#div_mostrar_tabla').html(data)
         }
     });
+}
+
+// Funcion con peticion AJAX para editar productos
+function editar(id) {
+    $.ajax({
+        url: 'assets/php/mostrar_datos_editar.php',
+        type: 'POST',
+        dataType: "json",
+        data: { id:id },
+        success: function (data) {
+            $('#id_editar').val(data.result[0].id)
+            $('#nombre_editar').val(data.result[0].nombre)
+            $('#descripcion_editar').val(data.result[0].descripcion)
+            $('#precio_editar').val(data.result[0].precio)
+            $('#categoria_editar').val(data.result[0].categoria)
+            $('.modal_editar_productos').modal('show');
+        }
+    })
+}
+
+// Funcion con peticion AJAX para eliminar productos
+function eliminar(id) {
+    
 }
