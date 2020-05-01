@@ -148,7 +148,7 @@ function eliminar(id) {
             data: { id:id },
             success: function (data) {
                 if (data == 1) {
-                    mostrar_tabla();
+                    mostrar_tabla()
 
                     setTimeout(function() {
                         $(".alert1").fadeOut(1500);
