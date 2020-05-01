@@ -141,5 +141,37 @@ function editar(id) {
 
 // Funcion con peticion AJAX para eliminar productos
 function eliminar(id) {
-    
+    if (window.confirm("Seguro que desea eliminar el producto: "+id)) { 
+        $.ajax({
+            url: 'assets/php/eliminar_producto.php',
+            type: 'POST',
+            data: { id:id },
+            success: function (data) {
+                if (data == 1) {
+                    mostrar_tabla()
+
+                    setTimeout(function() {
+                        $(".alert1").fadeOut(1500);
+                    },3000);
+
+                    $('#mensajes').html(`
+                        <div class="alert alert1 alert-success bg-success text-white" role="alert">
+                            El producto se elimino correctamente.
+                        </div>
+                    `);
+                    
+                } else {
+                    setTimeout(function() {
+                        $(".alert2").fadeOut(1500);
+                    },15000);
+
+                    $('#mensajes').html(`
+                        <div class="alert alert2 alert-danger bg-danger text-white" role="alert">
+                            El producto NO se elimino correctamente. Contacte al desarrollador.
+                        </div>
+                    `);
+                }
+            }
+        });
+    }
 }
