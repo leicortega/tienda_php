@@ -62,6 +62,47 @@ $(document).ready(function () {
         return false;
     });
 
+    // Peticon AJAX para agregar categoria
+    $('#form_agregar_categoria').submit(function () {
+        $.ajax({
+            url: 'assets/php/agregar_categoria.php',
+            type: 'POST',
+            data: $('#form_agregar_categoria').serialize(),
+            success: function (data) {
+                if (data == 1) {
+                    mostrar_tabla_categorias();
+
+                    setTimeout(function() {
+                        $(".alert1").fadeOut(1500);
+                    },3000);
+                     
+                    setTimeout(function() {
+                        $(".alert2").fadeOut(1500);
+                    },15000);
+
+                    $('#mensajes').html(`
+                        <div class="alert alert1 alert-success bg-success text-white" role="alert">
+                            La Categoria se creo correctamente.
+                        </div>
+                    `);
+                    $('.bs-example-modal-xl').modal('hide');
+                    $('#form_agregar_categoria')[0].reset();
+                    
+                } else {
+                    $('#mensajes').html(`
+                        <div class="alert alert2 alert-danger bg-danger text-white" role="alert">
+                            La Categoria NO se creo correctamente. Contacte al desarrollador.
+                        </div>
+                    `);
+                    $('.bs-example-modal-xl').modal('hide');
+                    $('#form_agregar_categoria')[0].reset();
+                }
+            }
+        })
+    
+        return false;
+    });
+
     // Peticon AJAX para EDITAR producto
     $('#form_editar_producto').submit(function () {
         $.ajax({
@@ -102,14 +143,58 @@ $(document).ready(function () {
     
         return false;
     });
+    // Peticon AJAX para EDITAR categoria
+    $('#form_editar_categoria').submit(function () {
+        $.ajax({
+            url: 'assets/php/editar_categoria.php',
+            type: 'POST',
+            data: $('#form_editar_categoria').serialize(),
+            success: function (data) {
+                if (data == 1) {
+                    mostrar_tabla_categorias();
+
+                    setTimeout(function() {
+                        $(".alert1").fadeOut(1500);
+                    },3000);
+
+                    $('#mensajes').html(`
+                        <div class="alert alert1 alert-success bg-success text-white" role="alert">
+                            La Categoria se edito correctamente.
+                        </div>
+                    `);
+                    $('.modal_editar_categoria').modal('hide');
+                    $('#form_editar_categoria')[0].reset();
+                    
+                } else {
+                    setTimeout(function() {
+                        $(".alert2").fadeOut(1500);
+                    },15000);
+
+                    $('#mensajes').html(`
+                        <div class="alert alert2 alert-danger bg-danger text-white" role="alert">
+                            La Categoria NO se edito correctamente. Contacte al desarrollador.
+                        </div>
+                    `);
+                    $('.modal_editar_categoria').modal('hide');
+                    $('#form_editar_categoria')[0].reset();
+                }
+            }
+        })
+    
+        return false;
+    });
 
     // Condicion para mostrar la tabla si esta en la ruta productos.php
     if (window.location.pathname == '/tienda_php/productos.php') {
         mostrar_tabla()
     }
+    // Condicion para mostrar la tabla si esta en la ruta productos.php
+    if (window.location.pathname == '/tienda_php/categorias.php') {
+        mostrar_tabla_categorias()
+    }
 
 });
-
+//-----------------------------------------------------------------------PRODUCTOS---------------------------------------------------------------
 // Funcion con peticion AJAX para mostrar la tabla de productos
 function mostrar_tabla() {
     $.ajax({
@@ -168,6 +253,69 @@ function eliminar(id) {
                     $('#mensajes').html(`
                         <div class="alert alert2 alert-danger bg-danger text-white" role="alert">
                             El producto NO se elimino correctamente. Contacte al desarrollador.
+                        </div>
+                    `);
+                }
+            }
+        });
+    }
+}
+// ---------------------------------------------------------CATEGORIAS------------------------------------------------------------------------------------
+// Funcion con peticion AJAX para mostrar la tabla de categorias
+function mostrar_tabla_categorias() {
+    $.ajax({
+        url: 'assets/php/mostrar_tabla_categoria.php',
+        type: 'GET',
+        success: function (data) {
+            $('#div_mostrar_tabla_categoria').html(data)
+        }
+    });
+}
+
+// Funcion con peticion AJAX para editar categorias
+function editar(id) {
+    $.ajax({
+        url: 'assets/php/mostrar_datos_editar_categoria.php',
+        type: 'POST',
+        dataType: "json",
+        data: { id:id },
+        success: function (data) {
+            $('#id_editar_categoria').val(data.result[0].id)
+            $('#nombre_editar_categoria').val(data.result[0].nombre)
+            $('.modal_editar_categoria').modal('show');
+        }
+    })
+}
+
+// Funcion con peticion AJAX para eliminar categorias
+function eliminar(id) {
+    if (window.confirm("Seguro que desea eliminar La Categoria: "+id)) { 
+        $.ajax({
+            url: 'assets/php/eliminar_categoria.php',
+            type: 'POST',
+            data: { id:id },
+            success: function (data) {
+                if (data == 1) {
+                    mostrar_tabla_categorias()
+
+                    setTimeout(function() {
+                        $(".alert1").fadeOut(1500);
+                    },3000);
+
+                    $('#mensajes').html(`
+                        <div class="alert alert1 alert-success bg-success text-white" role="alert">
+                            La categoria se elimino correctamente.
+                        </div>
+                    `);
+                    
+                } else {
+                    setTimeout(function() {
+                        $(".alert2").fadeOut(1500);
+                    },15000);
+
+                    $('#mensajes').html(`
+                        <div class="alert alert2 alert-danger bg-danger text-white" role="alert">
+                            La categoria NO se elimino correctamente. Contacte al desarrollador.
                         </div>
                     `);
                 }
