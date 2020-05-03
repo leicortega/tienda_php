@@ -193,6 +193,45 @@ $(document).ready(function () {
         mostrar_tabla_categorias()
     }
 
+    // Funcion para enviar respuesta de correo
+    $('#form_responder_correo').submit(function () {
+        var respuesta = $('#respuesta').html();
+        var id = $('#id_correo').val();
+
+        $('#btn-respuesta').attr('disabled', true).html(`
+            <div class="spinner-border text-light" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        `);
+
+
+        $.ajax({
+            url: 'assets/php/responder_correo.php',
+            type: 'POST',
+            data: { id:id, respuesta:respuesta },
+            success: function (data) {
+                if (data != 1) {
+                    setTimeout(function() {
+                        $(".alert2").fadeOut(1500);
+                    },3000);
+                    $('#btn-respuesta').removeAttr('disabled').html(`
+                        <span>Enviar</span> <i class="fab fa-telegram-plane ml-1"></i> 
+                    `);
+                    $('#mensajes').html(`
+                        <div class="alert alert2 alert-danger bg-danger text-white" role="alert">
+                            ERROR! el correo no fue enviado. Contacte al desarrollador.
+                        </div>
+                    `);
+                } else {
+                    window.location.href = 'email-contestados.php';
+                }
+
+            }
+        });
+
+        return false;
+    });
+
 });
 //-----------------------------------------------------------------------PRODUCTOS---------------------------------------------------------------
 // Funcion con peticion AJAX para mostrar la tabla de productos
