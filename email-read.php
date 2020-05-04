@@ -73,15 +73,22 @@ $conexion = conexion();
                                     <!-- <a href="email-compose.html" class="btn btn-danger btn-block waves-effect waves-light">Compose</a> -->
             
                                     <?php 
-                                    $sql_correo = $conexion->prepare('SELECT * from correos where id = '.$_GET['id']);
-                                    $sql_correo->execute();
-                                    $count_correos = $sql_correo->rowCount(); 
-                                    $correo = $sql_correo->fetchAll();
+                                        $sql_correo_contestados = $conexion->prepare('SELECT * from correos where !ISNULL(respuesta)');
+                                        $sql_correo_contestados->execute(); 
+                                        $count_correos_contestados = $sql_correo_contestados->rowCount();
+
+                                        $sql_correos = $conexion->prepare('SELECT * from correos where ISNULL(respuesta)');
+                                        $sql_correos->execute();
+                                        $count_correos = $sql_correos->rowCount(); 
+
+                                        $sql_correo = $conexion->prepare('SELECT * from correos where id = '.$_GET['id']);
+                                        $sql_correo->execute();
+                                        $correo = $sql_correo->fetchAll();
                                     ?>
 
                                     <div class="mail-list mt-4">
                                         <a href="email-inbox.php" class="active"><i class="mdi mdi-email-outline mr-2"></i> Inbox <span class="ml-1 float-right">(<?php print_r ( $count_correos ); ?>)</span></a>
-                                        <a href="email-contestados.php"><i class="mdi mdi-email-check-outline mr-2"></i>Contestados</a>
+                                        <a href="email-contestados.php"><i class="mdi mdi-email-check-outline mr-2"></i>Contestados <span class="ml-1 float-right">(<?php print_r ( $count_correos_contestados ); ?>)</span></a>
                                     </div>
             
                                 </div>
