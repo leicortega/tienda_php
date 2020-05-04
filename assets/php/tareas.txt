@@ -6,3 +6,5 @@
 5. Hacer el CRUD de Categorias
 
 6. Hacer modulo de correos contestados.
+
+7. Hacer el paginador de las demas tablas 
