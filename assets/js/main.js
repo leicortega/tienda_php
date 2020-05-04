@@ -143,6 +143,7 @@ $(document).ready(function () {
     
         return false;
     });
+
     // Peticon AJAX para EDITAR categoria
     $('#form_editar_categoria').submit(function () {
         $.ajax({
@@ -186,7 +187,7 @@ $(document).ready(function () {
 
     // Condicion para mostrar la tabla si esta en la ruta productos.php
     if (window.location.pathname == '/tienda_php/productos.php') {
-        mostrar_tabla()
+        mostrar_tabla(page = 1)
     }
     // Condicion para mostrar la tabla si esta en la ruta productos.php
     if (window.location.pathname == '/tienda_php/categorias.php') {
@@ -235,10 +236,11 @@ $(document).ready(function () {
 });
 //-----------------------------------------------------------------------PRODUCTOS---------------------------------------------------------------
 // Funcion con peticion AJAX para mostrar la tabla de productos
-function mostrar_tabla() {
+function mostrar_tabla(page) {
     $.ajax({
         url: 'assets/php/mostrar_tabla.php',
         type: 'GET',
+        data: { page:page },
         success: function (data) {
             $('#div_mostrar_tabla').html(data)
         }
@@ -302,9 +304,11 @@ function eliminar(id) {
 // ---------------------------------------------------------CATEGORIAS------------------------------------------------------------------------------------
 // Funcion con peticion AJAX para mostrar la tabla de categorias
 function mostrar_tabla_categorias() {
+    var page = 1;
     $.ajax({
         url: 'assets/php/mostrar_tabla_categoria.php',
         type: 'GET',
+        data: { page:page },
         success: function (data) {
             $('#div_mostrar_tabla_categoria').html(data)
         }
@@ -312,7 +316,7 @@ function mostrar_tabla_categorias() {
 }
 
 // Funcion con peticion AJAX para editar categorias
-function editar(id) {
+function editar_categorias(id) {
     $.ajax({
         url: 'assets/php/mostrar_datos_editar_categoria.php',
         type: 'POST',
@@ -327,7 +331,7 @@ function editar(id) {
 }
 
 // Funcion con peticion AJAX para eliminar categorias
-function eliminar(id) {
+function eliminar_categorias(id) {
     if (window.confirm("Seguro que desea eliminar La Categoria: "+id)) { 
         $.ajax({
             url: 'assets/php/eliminar_categoria.php',
