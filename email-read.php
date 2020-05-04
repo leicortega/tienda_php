@@ -75,12 +75,12 @@ $conexion = conexion();
                                     <?php 
                                     $sql_correo = $conexion->prepare('SELECT * from correos where id = '.$_GET['id']);
                                     $sql_correo->execute();
-
+                                    $count_correos = $sql_correo->rowCount(); 
                                     $correo = $sql_correo->fetchAll();
                                     ?>
 
                                     <div class="mail-list mt-4">
-                                        <a href="email-inbox.php" class="active"><i class="mdi mdi-email-outline mr-2"></i> Inbox <span class="ml-1 float-right">(<?php print_r ( $correo[0][0] ); ?>)</span></a>
+                                        <a href="email-inbox.php" class="active"><i class="mdi mdi-email-outline mr-2"></i> Inbox <span class="ml-1 float-right">(<?php print_r ( $count_correos ); ?>)</span></a>
                                         <a href="email-contestados.php"><i class="mdi mdi-email-check-outline mr-2"></i>Contestados</a>
                                     </div>
             

@@ -67,17 +67,17 @@ $conexion = conexion();
                                     <!-- Left sidebar -->
                                     <div class="email-leftbar card">
                                         <!-- <a href="email-compose.html" class="btn btn-danger btn-block waves-effect waves-light">Compose</a> -->
-                                         
                                         <?php
-                                        $sql_correos = $conexion->prepare('SELECT * from correos where ISNULL(respuesta)');
-                                        $sql_correos->execute();
-                    
-                                        $count_correos = $sql_correos->rowCount(); 
-                                        $correos = $sql_correos->fetchAll(); ?>  
 
+                                            $sql_correos = $conexion->prepare('SELECT * from correos c,usuarios u where !ISNULL(respuesta) and c.responsable = u.id');
+                                            $sql_correos->execute();
+                                            
+                                            $count_correos = $sql_correos->rowCount(); 
+                                            $correos = $sql_correos->fetchAll();?>
+                                            
                                         <div class="mail-list mt-4">
-                                            <a href="email-inbox.php" class="active"><i class="mdi mdi-email-outline mr-2"></i> Inbox <span class="ml-1 float-right">(<?php print_r ( $count_correos ); ?>)</span></a>
-                                            <a href="email-contestados.php"><i class="mdi mdi-email-check-outline mr-2"></i>Contestados</a>
+                                            <a href="email-inbox.php" class="active"><i class="mdi mdi-email-outline mr-2"></i> Inbox </a>
+                                            <a href="email-contestados.php"><i class="mdi mdi-email-check-outline mr-2"></i>Contestados<span class="ml-1 float-right">(<?php print_r ( $count_correos ); ?>)</span></a>
                                         </div>
             
                                     </div>
@@ -91,19 +91,19 @@ $conexion = conexion();
                                             
                                             <ul class="message-list">
 
-                                                
+                                               
 
-                                                <?php foreach ($correos as $correo) { ?>
+                                              <?php  foreach ($correos as $correo) { ?>
                                                     <li>
                                                         <div class="col-mail col-mail-1">
                                                             <div class="checkbox-wrapper-mail">
                                                                 <input type="checkbox" id="chk19">
                                                                 <label for="chk19" class="toggle"></label>
                                                             </div>
-                                                            <a href="email-read.php?id=<?php echo $correo['id']; ?>" class="title"><?php echo $correo['nombre_cliente']; ?></a><span class="star-toggle far fa-eye"></span>
+                                                            <a href="email-read_contestados.php?id=<?php echo $correo[0]; ?>" class="title"><?php echo $correo['nombre_cliente']; ?></a><span class="star-toggle far fa-eye"></span>
                                                         </div>
                                                         <div class="col-mail col-mail-2">
-                                                            <a href="email-read.php?id=<?php echo $correo['id']; ?>" class="subject"><?php echo $correo['asunto']; ?></span>
+                                                            <a href="email-read_contestados.php?id=<?php echo $correo[0]; ?>" class="subject"><?php echo $correo['asunto']; ?></span>
                                                             </a>
                                                             <div class="date"><?php echo $correo['fecha']; ?></div>
                                                         </div>
