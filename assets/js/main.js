@@ -29,7 +29,7 @@ $(document).ready(function () {
             data: $('#form_agregar_producto').serialize(),
             success: function (data) {
                 if (data == 1) {
-                    mostrar_tabla();
+                    mostrar_tabla(page = 1);
 
                     setTimeout(function() {
                         $(".alert1").fadeOut(1500);
