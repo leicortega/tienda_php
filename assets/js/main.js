@@ -187,7 +187,7 @@ $(document).ready(function () {
 
     // Condicion para mostrar la tabla si esta en la ruta productos.php
     if (window.location.pathname == '/tienda_php/productos.php') {
-        mostrar_tabla(page = 1)
+        mostrar_tabla(page = 1, order = 'desc')
     }
     // Condicion para mostrar la tabla si esta en la ruta productos.php
     if (window.location.pathname == '/tienda_php/categorias.php') {
@@ -236,11 +236,11 @@ $(document).ready(function () {
 });
 //-----------------------------------------------------------------------PRODUCTOS---------------------------------------------------------------
 // Funcion con peticion AJAX para mostrar la tabla de productos
-function mostrar_tabla(page) {
+function mostrar_tabla(page, order) {
     $.ajax({
         url: 'assets/php/mostrar_tabla.php',
         type: 'GET',
-        data: { page:page },
+        data: { page:page, order:order },
         success: function (data) {
             $('#div_mostrar_tabla').html(data)
         }
