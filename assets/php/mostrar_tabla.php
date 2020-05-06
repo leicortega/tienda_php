@@ -10,7 +10,7 @@ $conexion = conexion();
 // Operacion para tomar el inicio de la consulta 
 $inicio = ($_REQUEST['page'] - 1) * 5;
 
-$sql = $conexion->prepare('SELECT * from productos p, categorias c where p.categoria = c.id limit '.$inicio.', 5');
+$sql = $conexion->prepare('SELECT * from productos p, categorias c where p.categoria = c.id order by p.id '.$_REQUEST['order'].' limit '.$inicio.', 5');
 $sql->execute();
 $datos = $sql->fetchAll();
 
@@ -66,9 +66,28 @@ if ($num_item == 0) {           //Si el numero de paginas es 0, le asignamos el 
             </li>
 
             <!-- Ciclo for para mostrar la cantidad de paginas o numeros en el paginador -->
-            <?php for ($i=1; $i <= $num_item; $i++) { ?>
-                    <!-- Agregamos la funcion mostrar_tabla con el valor de la variable i del ciclo for -->
-                    <li class="page-item <?php echo $i == $_REQUEST['page'] ? 'active' : ''; ?>"><a class="page-link" href="#" onclick="mostrar_tabla(<?php echo $i; ?>)"><?php echo $i; ?></a></li>
+            <?php 
+
+            
+            if ($num_item > 5) {                    // Si el numero de items del paginador es mayor a 5 entonces num_item_paginador sera igual a 5
+                $num_item_paginador = 5;
+            } else {                                // Si el numero de items del paginador es menor que 6 entonces num_item_paginador sera igual a num_item
+                $num_item_paginador = $num_item;
+            }
+
+            if ($_REQUEST['page'] > 3) {
+                $j = $_REQUEST['page'] - 2;
+                $num_item_paginador = $_REQUEST['page'] + 2;
+                if ($num_item_paginador > $num_item) {
+                    $num_item_paginador = $num_item;
+                }
+            } else {
+                $j = 1;
+            }
+
+            for ($i = $j; $i <= $num_item_paginador; $i++) {  ?>
+                <!-- Agregamos la funcion mostrar_tabla con el valor de la variable i del ciclo for -->
+                <li class="page-item <?php echo $i == $_REQUEST['page'] ? 'active' : ''; ?>"><a class="page-link" href="#" onclick="mostrar_tabla(<?php echo $i; ?>)"><?php echo$i; ?></a></li>
             <?php } ?>
 
             <!-- Cuando de clic en Siguiente llamamos la funcion mostrar_tabla y le sumamos 1 -->
