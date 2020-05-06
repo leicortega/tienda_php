@@ -67,7 +67,6 @@ if ($num_item == 0) {           //Si el numero de paginas es 0, le asignamos el 
 
             <!-- Ciclo for para mostrar la cantidad de paginas o numeros en el paginador -->
             <?php 
-
             
             if ($num_item > 5) {                    // Si el numero de items del paginador es mayor a 5 entonces num_item_paginador sera igual a 5
                 $num_item_paginador = 5;
@@ -75,14 +74,14 @@ if ($num_item == 0) {           //Si el numero de paginas es 0, le asignamos el 
                 $num_item_paginador = $num_item;
             }
 
-            if ($_REQUEST['page'] > 3) {
-                $j = $_REQUEST['page'] - 2;
-                $num_item_paginador = $_REQUEST['page'] + 2;
-                if ($num_item_paginador > $num_item) {
-                    $num_item_paginador = $num_item;
+            if ($_REQUEST['page'] > 3) {                      // Si la pagina actual es mayor a 3 entonces 
+                $j = $_REQUEST['page'] - 2;                   // Variable j tendra el inicio del ciclo for asignandole el numero de la pagina actual - 2
+                $num_item_paginador = $_REQUEST['page'] + 2;  // El numero final del cliclo for (num_item_paginador) sera igual a la pagina actual + 2
+                if ($num_item_paginador > $num_item) {        // Si el numero final del ciclo for es mayor al numero de paginas entonces
+                    $num_item_paginador = $num_item;          // El numero final del ciclo for sera igual al numero total de items
                 }
-            } else {
-                $j = 1;
+            } else {        
+                $j = 1;                                       // Si el numero de la pagina actual es menor a 4 entonces el ciclo for inicia en 1
             }
 
             for ($i = $j; $i <= $num_item_paginador; $i++) {  ?>
