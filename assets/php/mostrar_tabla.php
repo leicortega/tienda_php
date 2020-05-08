@@ -62,7 +62,7 @@ if ($num_item == 0) {           //Si el numero de paginas es 0, le asignamos el 
         <ul class="pagination">
             <li class="page-item <?php echo $_REQUEST['page'] > 1 ? '' : 'disabled'; ?>">
                 <!-- Cuando de clic en atras llamamos la funcion mostrar_tabla y le restamos 1 -->
-                <a class="page-link" href="#" tabindex="-1" onclick="mostrar_tabla(<?php echo ($_REQUEST['page'] - 1); ?>)">Atras</a>
+                <a class="page-link" href="#" tabindex="-1" onclick="mostrar_tabla(<?php echo ($_REQUEST['page'] - 1); ?>, 'desc')">Atras</a>
             </li>
 
             <!-- Ciclo for para mostrar la cantidad de paginas o numeros en el paginador -->
@@ -86,12 +86,12 @@ if ($num_item == 0) {           //Si el numero de paginas es 0, le asignamos el 
 
             for ($i = $j; $i <= $num_item_paginador; $i++) {  ?>
                 <!-- Agregamos la funcion mostrar_tabla con el valor de la variable i del ciclo for -->
-                <li class="page-item <?php echo $i == $_REQUEST['page'] ? 'active' : ''; ?>"><a class="page-link" href="#" onclick="mostrar_tabla(<?php echo $i; ?>)"><?php echo$i; ?></a></li>
+                <li class="page-item <?php echo $i == $_REQUEST['page'] ? 'active' : ''; ?>"><a class="page-link" href="#" onclick="mostrar_tabla(<?php echo ($i); ?>, 'desc')"><?php echo$i; ?></a></li>
             <?php } ?>
 
             <!-- Cuando de clic en Siguiente llamamos la funcion mostrar_tabla y le sumamos 1 -->
             <li class="page-item <?php echo $_REQUEST['page'] == $num_item ? 'disabled' : ''; ?>">
-                <a class="page-link" href="#" onclick="mostrar_tabla(<?php echo ($_REQUEST['page'] + 1); ?>)">Siguiente</a>
+                <a class="page-link" href="#" onclick="mostrar_tabla(<?php echo ($_REQUEST['page'] + 1); ?>, 'desc')">Siguiente</a>
             </li>
         </ul>
     </nav>

@@ -29,7 +29,7 @@ $(document).ready(function () {
             data: $('#form_agregar_producto').serialize(),
             success: function (data) {
                 if (data == 1) {
-                    mostrar_tabla(page = 1,order = 1);
+                    mostrar_tabla(page = 1,order = 'desc');
 
                     setTimeout(function() {
                         $(".alert1").fadeOut(1500);
@@ -70,7 +70,7 @@ $(document).ready(function () {
             data: $('#form_agregar_categoria').serialize(),
             success: function (data) {
                 if (data == 1) {
-                    mostrar_tabla_categorias();
+                    mostrar_tabla_categorias(page = 1,order = 'desc');
 
                     setTimeout(function() {
                         $(".alert1").fadeOut(1500);
@@ -111,7 +111,7 @@ $(document).ready(function () {
             data: $('#form_editar_producto').serialize(),
             success: function (data) {
                 if (data == 1) {
-                    mostrar_tabla();
+                    mostrar_tabla(page = 1,order = 'desc');
 
                     setTimeout(function() {
                         $(".alert1").fadeOut(1500);
@@ -152,7 +152,7 @@ $(document).ready(function () {
             data: $('#form_editar_categoria').serialize(),
             success: function (data) {
                 if (data == 1) {
-                    mostrar_tabla_categorias();
+                    mostrar_tabla_categorias(page = 1,order = 'desc');
 
                     setTimeout(function() {
                         $(".alert1").fadeOut(1500);
@@ -189,9 +189,9 @@ $(document).ready(function () {
     if (window.location.pathname == '/tienda_php/productos.php') {
         mostrar_tabla(page = 1, order = 'desc')
     }
-    // Condicion para mostrar la tabla si esta en la ruta productos.php
+    // Condicion para mostrar la tabla si esta en la ruta categorias.php
     if (window.location.pathname == '/tienda_php/categorias.php') {
-        mostrar_tabla_categorias()
+        mostrar_tabla_categorias(page = 1, order = 'desc')
     }
 
     // Funcion para enviar respuesta de correo
@@ -274,7 +274,7 @@ function eliminar(id) {
             data: { id:id },
             success: function (data) {
                 if (data == 1) {
-                    mostrar_tabla()
+                    mostrar_tabla(page = 1,order = 'desc')
 
                     setTimeout(function() {
                         $(".alert1").fadeOut(1500);
@@ -303,12 +303,12 @@ function eliminar(id) {
 }
 // ---------------------------------------------------------CATEGORIAS------------------------------------------------------------------------------------
 // Funcion con peticion AJAX para mostrar la tabla de categorias
-function mostrar_tabla_categorias() {
-    var page = 1;
+function mostrar_tabla_categorias(page, order) {
+    //var page = 1;
     $.ajax({
         url: 'assets/php/mostrar_tabla_categoria.php',
         type: 'GET',
-        data: { page:page },
+        data: { page:page, order:order },
         success: function (data) {
             $('#div_mostrar_tabla_categoria').html(data)
         }
@@ -316,12 +316,12 @@ function mostrar_tabla_categorias() {
 }
 
 // Funcion con peticion AJAX para editar categorias
-function editar_categorias(id) {
+function editar_categorias(id, order) {
     $.ajax({
         url: 'assets/php/mostrar_datos_editar_categoria.php',
         type: 'POST',
         dataType: "json",
-        data: { id:id },
+        data: { id:id, order:order },
         success: function (data) {
             $('#id_editar_categoria').val(data.result[0].id)
             $('#nombre_editar_categoria').val(data.result[0].nombre)
@@ -331,15 +331,15 @@ function editar_categorias(id) {
 }
 
 // Funcion con peticion AJAX para eliminar categorias
-function eliminar_categorias(id) {
+function eliminar_categorias(id,order) {
     if (window.confirm("Seguro que desea eliminar La Categoria: "+id)) { 
         $.ajax({
             url: 'assets/php/eliminar_categoria.php',
             type: 'POST',
-            data: { id:id },
+            data: { id:id, order:order },
             success: function (data) {
                 if (data == 1) {
-                    mostrar_tabla_categorias()
+                    mostrar_tabla_categorias(page = 1,order = 'desc')
 
                     setTimeout(function() {
                         $(".alert1").fadeOut(1500);
