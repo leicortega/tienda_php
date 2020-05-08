@@ -187,7 +187,7 @@ $(document).ready(function () {
 
     // Condicion para mostrar la tabla si esta en la ruta productos.php
     if (window.location.pathname == '/tienda_php/productos.php') {
-        mostrar_tabla(page = 1, order = 'desc')
+        mostrar_tabla(page = 1, order = 'desc')   // Llamamos la funcion mostrar_tabla con los datos page = 1 y order = 'asc' por defecto
     }
     // Condicion para mostrar la tabla si esta en la ruta categorias.php
     if (window.location.pathname == '/tienda_php/categorias.php') {
