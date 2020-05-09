@@ -8,3 +8,5 @@
 6. Hacer modulo de correos contestados.
 
 7. Hacer el paginador de las demas tablas 
+
+8. Hacer editar producto subiendo la imagen. hacer la validacion para cuando no se va a cambiar la imagen

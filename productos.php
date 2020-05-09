@@ -100,7 +100,7 @@ $conexion = conexion();
                         </div>
                         <div class="modal-body">
 
-                            <form action="assets/php/agregar_producto.php" method="post" id="form_agregar_producto">
+                            <form action="assets/php/agregar_producto.php" method="post" id="form_agregar_producto" enctype="multipart/form-data">
                                 <div class="form-group row">
                                     <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
                                     <div class="col-sm-10">
@@ -138,6 +138,16 @@ $conexion = conexion();
                                             <?php } ?>
                                             
                                         </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="imagen" class="col-sm-2 col-form-label">Imagen</label>
+                                    <div class="col-sm-10">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="imagen" name="imagen" accept="image/png,image/jpg,image/jpeg" />
+                                            <label class="custom-file-label" for="imagen">Seleccione imagen</label>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -200,6 +210,22 @@ $conexion = conexion();
                                                 <option value="<?php echo $categoria['id']; ?>"><?php echo $categoria['nombre']; ?></option>
                                             <?php } ?>
                                         </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="imagen" class="col-sm-2 col-form-label">Imagen</label>
+                                    <div class="col-sm-10">
+                                        <div class="form-group">
+                                            <label>Imagen del producto</label> <br/>
+                                            <img src="assets/images/products/1.jpg" alt="product img" class="img-fluid rounded" id="img_producto" style="max-width: 200px;" />
+                                            
+                                            <div class="custom-file mt-3">
+                                                <input type="file" class="custom-file-input" id="imagen" name="imagen" accept="image/png,image/jpg,image/jpeg" />
+                                                <label class="custom-file-label" for="imagen">Seleccione imagen</label>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
 

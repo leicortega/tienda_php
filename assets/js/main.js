@@ -23,13 +23,23 @@ $(document).ready(function () {
 
     // Peticon AJAX para agregar producto
     $('#form_agregar_producto').submit(function () {
+        var formData = new FormData();
+        var imagen = $('#imagen')[0].files[0];
+        formData.append('imagen', imagen);
+        formData.append('nombre', $('#nombre').val());
+        formData.append('descripcion', $('#descripcion').val());
+        formData.append('precio', $('#precio').val());
+        formData.append('categoria', $('#categoria').val());
+
         $.ajax({
             url: 'assets/php/agregar_producto.php',
             type: 'POST',
-            data: $('#form_agregar_producto').serialize(),
+            data: formData,
+            contentType: false, 
+            processData: false,
             success: function (data) {
                 if (data == 1) {
-                    mostrar_tabla(page = 1,order = 'desc');
+                    mostrar_tabla(page = 1, order = 'desc');
 
                     setTimeout(function() {
                         $(".alert1").fadeOut(1500);
@@ -57,7 +67,7 @@ $(document).ready(function () {
                     $('#form_agregar_producto')[0].reset();
                 }
             }
-        })
+        });
     
         return false;
     });
@@ -260,6 +270,7 @@ function editar(id) {
             $('#descripcion_editar').val(data.result[0].descripcion)
             $('#precio_editar').val(data.result[0].precio)
             $('#categoria_editar').val(data.result[0].categoria)
+            $('#img_producto').attr("src","assets/images/productos/"+data.result[0].imagen);
             $('.modal_editar_productos').modal('show');
         }
     })
