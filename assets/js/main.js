@@ -115,11 +115,22 @@ $(document).ready(function () {
 
     // Peticon AJAX para EDITAR producto
     $('#form_editar_producto').submit(function () {
+        var formData_editar = new FormData();
+        var imagen_editar = $('#imagen_editar')[0].files[0];
+        formData_editar.append('id', $('#id_editar').val());
+        formData_editar.append('imagen', imagen_editar);
+        formData_editar.append('nombre', $('#nombre_editar').val());
+        formData_editar.append('descripcion', $('#descripcion_editar').val());
+        formData_editar.append('precio', $('#precio_editar').val());
+        formData_editar.append('categoria', $('#categoria_editar').val());
         $.ajax({
             url: 'assets/php/editar_producto.php',
             type: 'POST',
-            data: $('#form_editar_producto').serialize(),
+            data: formData_editar,
+            contentType: false, 
+            processData: false,
             success: function (data) {
+               
                 if (data == 1) {
                     mostrar_tabla(page = 1,order = 'desc');
 
@@ -270,7 +281,7 @@ function editar(id) {
             $('#descripcion_editar').val(data.result[0].descripcion)
             $('#precio_editar').val(data.result[0].precio)
             $('#categoria_editar').val(data.result[0].categoria)
-            $('#img_producto').attr("src","assets/images/productos/"+data.result[0].imagen);
+            $('#img_editar').attr("src","assets/images/productos/"+data.result[0].imagen);
             $('.modal_editar_productos').modal('show');
         }
     })

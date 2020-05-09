@@ -218,11 +218,11 @@ $conexion = conexion();
                                     <div class="col-sm-10">
                                         <div class="form-group">
                                             <label>Imagen del producto</label> <br/>
-                                            <img src="assets/images/products/1.jpg" alt="product img" class="img-fluid rounded" id="img_producto" style="max-width: 200px;" />
+                                            <img src="assets/images/products/1.jpg" alt="product img" class="img-fluid rounded" id="img_editar" style="max-width: 200px;" />
                                             
                                             <div class="custom-file mt-3">
-                                                <input type="file" class="custom-file-input" id="imagen" name="imagen" accept="image/png,image/jpg,image/jpeg" />
-                                                <label class="custom-file-label" for="imagen">Seleccione imagen</label>
+                                                <input type="file" class="custom-file-input" id="imagen_editar" name="imagen_editar" accept="image/png,image/jpg,image/jpeg" />
+                                                <label class="custom-file-label" for="imagen_editar">Seleccione imagen</label>
                                             </div>
                                         </div>
 
